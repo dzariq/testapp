@@ -3,6 +3,7 @@ import './App.css';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Component } from 'react';
+import axios from 'axios';
 
 class App extends Component {
 
@@ -20,7 +21,7 @@ class App extends Component {
     }
 
     async refreshUsers() {
-        fetch(this.api_url+'/users')
+        fetch(this.api_url + '/users')
                 .then((res) => res.json())
                 .then((data) => this.setState({users: data}));
     }
@@ -30,20 +31,17 @@ class App extends Component {
         const data = new FormData();
 
         data.append("name", userName);
-
-        fetch(this.api_url+'/add', {
-            method: 'POST',
-            body: data
-        })
+        axios.post('https://reqres.in/api/articles', data)
                 .then((res) => res.json())
                 .then((res) => {
                     alert(res);
                     this.refreshUsers()
                 });
+
     }
 
     async deleteClick(id) {
-        fetch(this.api_url+'/delete?user_id=' + id, {
+        fetch(this.api_url + '/delete?user_id=' + id, {
             method: 'DELETE'
         })
                 .then((res) => res.json())
