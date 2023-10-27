@@ -31,7 +31,12 @@ class App extends Component {
         const data = new FormData();
 
         data.append("name", userName);
-        axios.post(this.api_url + '/add', data)
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+        axios.post(this.api_url + '/add', data,config)
                 .then((res) => res.json())
                 .then((res) => {
                     alert(res);
