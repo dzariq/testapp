@@ -1,25 +1,75 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: []
+        }
+        this.api_url = 'https://nlp.fantasyligasuper.com';
+    }
+
+    //init
+    componentDidMount() {
+        this.refreshUsers()
+    }
+
+    async refreshUsers() {
+        fetch(this.api_url+'/users')
+                .then((res) => res.json())
+                .then((data) => this.setState({users: data}));
+    }
+
+    async addClick() {
+        var userName = document.getElementById('userName').value;
+        const data = new FormData();
+
+        data.append("name", userName);
+
+        fetch(this.api_url+'/add', {
+            method: 'POST',
+            body: data
+        })
+                .then((res) => res.json())
+                .then((res) => {
+                    alert(res);
+                    this.refreshUsers()
+                });
+    }
+
+    async deleteClick(id) {
+        fetch(this.api_url+'/delete?user_id=' + id, {
+            method: 'DELETE'
+        })
+                .then((res) => res.json())
+                .then((res) => {
+                    alert(res);
+                    this.refreshUsers()
+                });
+    }
+
+    render() {
+        const{users} = this.state;
+        return (
+                <div className="App">
+                    <h2>BADA APP</h2>
+                    <input id="userName" />
+                    <button onClick={() => this.addClick()} >Add User</button>
+                    {users.map(user =>
+                                <p>
+                                    <b>{user.name}</b>
+                                    <button onClick={() => this.deleteClick(user.user_id)} >Delete User</button>
+                                </p>
+                        )}
+                </div>
+                );
+    }
+
 }
 
 export default App;
