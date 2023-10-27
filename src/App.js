@@ -31,7 +31,7 @@ class App extends Component {
         const data = new FormData();
 
         data.append("name", userName);
-        axios.post('https://reqres.in/api/articles', data)
+        axios.post(this.api_url + '/add', data)
                 .then((res) => res.json())
                 .then((res) => {
                     alert(res);
