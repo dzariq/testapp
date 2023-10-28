@@ -21,9 +21,11 @@ class App extends Component {
     }
 
     async refreshUsers() {
-        fetch(this.api_url + '/users')
-                .then((res) => res.json())
-                .then((data) => this.setState({users: data}));
+        const response = await axios.get(this.api_url + '/users')
+        const data = await response.data
+        this.setState({
+            users: data,
+        })
     }
 
     async addClick() {
@@ -36,24 +38,19 @@ class App extends Component {
                 "Content-Type": "application/json",
             },
         };
-        axios.post(this.api_url + '/add', data,config)
-                .then((res) => res.json())
-                .then((res) => {
-                    alert(res);
-                    this.refreshUsers()
-                });
+        const res = await axios.post(this.api_url + '/add', data, config)
+        const resData = await res.resData
+        alert('SUCCESS ADD')
+        this.refreshUsers();
 
     }
 
     async deleteClick(id) {
-        fetch(this.api_url + '/delete?user_id=' + id, {
-            method: 'DELETE'
-        })
-                .then((res) => res.json())
-                .then((res) => {
-                    alert(res);
-                    this.refreshUsers()
-                });
+        const res = await axios.delete(this.api_url + '/delete?user_id=' + id)
+        const resData = await res.resData
+        alert('SUCCESS DELETE')
+        this.refreshUsers();
+
     }
 
     render() {
