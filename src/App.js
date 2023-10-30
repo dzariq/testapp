@@ -23,7 +23,7 @@ import Careers from './pages/careers/Careers'
                 createRoutesFromElements(
                         <Route path="/" element={ < RootLayout / > }  >
                             <Route index element={ < Home / > } />
-                            <Route path="payment/:orderId" element={ < Payment / > } />
+                            <Route path="payment" element={ < Payment / > } />
                             <Route path="help" element={ < HelpLayout / > }>
                                 <Route path="faq" element={ < Faq / > } />
                                 <Route path="contact" element={ < Contact / > } />

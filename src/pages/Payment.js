@@ -4,7 +4,8 @@ import { useEffect,useState } from 'react';
 
 
 export default function Payment() {
-        const {orderId} = useParams();
+   const searchParams = new URLSearchParams(window.location.search);
+    const orderId = searchParams.get('order_id');
 
         const api_url = 'https://nlp.fantasyligasuper.com';
     const [users,setData] = useState([])
