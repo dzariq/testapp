@@ -22,7 +22,7 @@ export default function Payment() {
                 .then(response => {
                     console.log(response.data[0].formcode)
                     setData(response.data[0])
-                    setUrl(`https://app.senangpay.my/payment/${response.data[0].formcode}`)
+                    setUrl(`${response.data[0].url}/payment/${response.data[0].formcode}`)
 
                 })
                 .catch(err => console.log(err))
