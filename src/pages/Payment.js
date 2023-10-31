@@ -9,20 +9,24 @@ export default function Payment() {
 
     const api_url = 'https://nlp.fantasyligasuper.com';
     const [payment, setData] = useState([]);
-    const [actionUrl, setUrl] = useState([]);
+    const [actionUrl, setUrl] = useState('');
 
-    
+    useEffect(() => {
+        const form = document.getElementById('order');
+        if (actionUrl != '')
+            form.submit();
+    }, [actionUrl]);
+
     useEffect(() => {
         axios.get(api_url + '/payment/' + orderId)
                 .then(response => {
                     console.log(response.data[0].formcode)
                     setData(response.data[0])
                     setUrl(`https://app.senangpay.my/payment/${response.data[0].formcode}`)
+
                 })
                 .catch(err => console.log(err))
 
-        const form = document.getElementById('order');
-       form.submit();
     }, []);
 
     return (
