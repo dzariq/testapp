@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect,useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Home() {
     const api_url = 'https://nlp.fantasyligasuper.com';
