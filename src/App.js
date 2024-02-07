@@ -65,20 +65,17 @@ import Careers from './pages/careers/Careers'
                                         },
                                     };
                                     const res = await axios.post(this.api_url + '/add', data, config)
-                                    const resData = await res.resData
                                     alert('SUCCESS ADD')
                                     this.refreshUsers();
                                 }
 
                                 async deleteClick(id) {
                                     const res = await axios.delete(this.api_url + '/delete?user_id=' + id)
-                                    const resData = await res.resData
                                     alert('SUCCESS DELETE')
                                     this.refreshUsers();
                                 }
 
                                 render() {
-                                    const{users} = this.state;
                                     return (
                                             <RouterProvider router={router}  />
                                             );
