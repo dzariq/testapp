@@ -64,13 +64,13 @@ import Careers from './pages/careers/Careers'
                                             "Content-Type": "application/json",
                                         },
                                     };
-                                    const res = await axios.post(this.api_url + '/add', data, config)
+                                    await axios.post(this.api_url + '/add', data, config)
                                     alert('SUCCESS ADD')
                                     this.refreshUsers();
                                 }
 
                                 async deleteClick(id) {
-                                    const res = await axios.delete(this.api_url + '/delete?user_id=' + id)
+                                    await axios.delete(this.api_url + '/delete?user_id=' + id)
                                     alert('SUCCESS DELETE')
                                     this.refreshUsers();
                                 }
