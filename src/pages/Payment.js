@@ -17,6 +17,8 @@ export default function Payment() {
             form.submit();
     }, [actionUrl]);
 
+    
+
     useEffect(() => {
         axios.get(api_url + '/payment/' + orderId)
                 .then(response => {
@@ -27,7 +29,7 @@ export default function Payment() {
                 })
                 .catch(err => console.log(err))
 
-    }, []);
+    }, [orderId]);
 
     return (
             <form id="order" method="post" action={actionUrl}>
